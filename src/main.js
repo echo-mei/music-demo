@@ -2,12 +2,12 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router/router";
 import store from "./store/store";
-import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
-import "./common/less/index.less";
+import "common/stylus/index.styl";
+import Cube from "cube-ui";
+
+Vue.use(Cube);
 
 Vue.config.productionTip = false;
-Vue.use(ElementUI);
 
 new Vue({
   router,

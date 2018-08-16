@@ -1,10 +1,6 @@
 <template>
-  <div class="m-header">
-      <span class="logo"></span>
-      <h1 class="title">Music</h1>
-      <div class="mine">
-          <i class="icon-mine"></i>
-      </div>
+  <div class="m-tabs">
+    <ul></ul>
   </div>
 </template>
 
@@ -15,7 +11,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus" rel="stylesheet/stylus">
-@import "~common/stylus/mixin";
+@import "~common/stylus/mixin.styl";
 
 .m-header{
     font-size: 0;
@@ -27,7 +23,7 @@ export default {
         height: 32px;
         display: inline-block;
         vertical-align: middle;
-        bg-image('logo');
+        .bg-image('logo');
         background-size: 100%;
         margin-right: 10px;
     }
