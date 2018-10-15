@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "../views//Home.vue";
+import MRecommend from "views/m-recommend/m-recommend";
 
 Vue.use(Router);
 
@@ -10,17 +10,40 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "recommend",
+      component: MRecommend
     },
     {
-      path: "/about",
-      name: "about",
+      path: "/recommend",
+      name: "recommend",
+      component: MRecommend
+    },
+    {
+      path: "/singer",
+      name: "singer",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "about" */ "../views/About.vue")
+        import(/* webpackChunkName: "singer" */ "views/m-singer/m-singer.vue")
+    },
+    {
+      path: "/rank",
+      name: "rank",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "rank" */ "views/m-rank/m-rank.vue")
+    },
+    {
+      path: "/search",
+      name: "search",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "search" */ "views/m-search/m-search.vue")
     }
   ]
 });

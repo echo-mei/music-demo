@@ -1,48 +1,22 @@
 <template>
   <div class="m-tabs">
-    <ul></ul>
+    <router-link to="/recommend" tag="div" class="tab-item"><span class="tab-link">推荐</span></router-link>
+    <router-link to="/singer" tag="div" class="tab-item"><span class="tab-link">歌手</span></router-link>
+    <router-link to="/rank" tag="div" class="tab-item"><span class="tab-link">排行</span></router-link>
+    <router-link to="/search" tag="div" class="tab-item"><span class="tab-link">搜索</span></router-link>
   </div>
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus" rel="stylesheet/stylus">
-@import "~common/stylus/mixin.styl";
-
-.m-header{
-    font-size: 0;
-    text-align: center;
-    position: relative; 
-    color:#ffcd32;
-    .logo{
-        width: 30px;
-        height: 32px;
-        display: inline-block;
-        vertical-align: middle;
-        .bg-image('logo');
-        background-size: 100%;
-        margin-right: 10px;
-    }
-    .title{
-        display: inline-block;
-        vertical-align: middle;
-        font-size: 18px;
-        line-height: 44px;
-    }
-    .mine{
-        position: absolute;
-        right: 0;
-        top: 0;
-        .icon-mine{
-            display: block;
-            font-size: 20px;
-            color:#ffcd32;
-            padding: 12px;
-        }
-    }
+.m-tabs {
+  display:flex;
+  .tab-item{
+    flex:1;
+  }
 }
 </style>

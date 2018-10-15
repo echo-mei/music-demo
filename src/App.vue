@@ -1,17 +1,14 @@
 <template>
   <div id="app">
     <m-header></m-header>
-    <cube-button type="submit">Submit Button</cube-button>
-    <cube-select v-model="value" :options="options"></cube-select>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <m-tabs></m-tabs> 
     <router-view/>
   </div>
 </template>
 <script>
 import MHeader from "components/m-header/m-header";
+import MTabs from "components/m-tabs/m-tabs";
+
 export default {
   data() {
     return {
@@ -20,7 +17,8 @@ export default {
     }
   },
   components: {
-    MHeader
+    MHeader,
+    MTabs
   }
 };
 </script>
