@@ -1,6 +1,6 @@
 <template>
   <div class="m-rank">
-评价页面
+排行页面
   </div>
 </template>
 

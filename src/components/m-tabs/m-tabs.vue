@@ -15,8 +15,21 @@ export default {};
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .m-tabs {
   display:flex;
+  font-size: 14px;
+  height: 44px;
+  line-height: 44px;
   .tab-item{
     flex:1;
+    .tab-link{
+      padding-bottom:5px;
+      color: hsla(0,0%,100%,.5);
+    }
+    &.active{
+      .tab-link{
+        color: #ffcd32;
+        border-bottom: 2px solid #ffcd32;
+      }
+    }
   }
 }
 </style>
