@@ -5,9 +5,11 @@
 </template>
 
 <script>
+import { getSongList } from "api/recommend";
 export default {
    data() {
     return {
+      discList: [],
       items: [
         {
           // url: 'http://www.didichuxing.com/',
@@ -22,6 +24,20 @@ export default {
           image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png'
         }
       ]
+    }
+  },
+  created(){
+    console.log("recommentd")
+    this._getSongs();
+  },
+  methods:{
+    _getSongs() {
+      getSongList().then((res) => {
+        console.log(res);
+          if (res.code === ERR_OK) {
+            this.discList = res.data.slider
+          }
+        });
     }
   }
 };

@@ -5,7 +5,8 @@
 // 如果您的应用程序部署在子路径中，则需要在这指定子路径
 // 例如：https://www.foobar.com/my-app/
 // 需要将它改为'/my-app/'
-var path = require("path");
+const path = require("path");
+const axios = require("axios");
 function resolve(dir) {
   console.log(__dirname);
   return path.join(__dirname, dir);
@@ -32,16 +33,34 @@ module.exports = {
     port: 9999, // 端口号
     host: "localhost",
     open: true, //配置自动启动浏览器
-    // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理,
-    proxy: {
-      "/api": {
-        target: "<url>",
-        ws: true,
-        changeOrigin: true
-      },
-      "/foo": {
-        target: "<other_url>"
-      }
+    before: function(app) {
+      app.get("/api/getDiscList", function (req, res) {
+        const url = "https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg";
+        axios
+          .get(url, {
+            headers: {
+              referer: "https://c.y.qq.com/",
+              host: "c.y.qq.com"
+            },
+            params: req.query
+          })
+          .then(response => {
+            res.json(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      });
     }
+    // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理,
+    // proxy: {
+    //   "/api": {
+    //     target: "<url>",
+    //     changeOrigin: true
+    //   },
+    //   "/foo": {
+    //     target: "<other_url>"
+    //   }
+    // }
   }
 };
