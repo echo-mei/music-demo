@@ -63,12 +63,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" rel="stylesheet/stylus">
 .m-recommend {
-  height:calc(100% - 88px);
-  overflow:auto;
+  height: calc(100% - 88px);
+  overflow: auto;
   color: #fff;
 
   .cube-slide {
-    height: 144px;
+    height: auto;
+
+    .cube-slide-item {
+      &>a {
+        width: 100%;
+        height:auto;
+
+        &>img {
+          width: 100%;
+          height:auto;
+        }
+      }
+    }
 
     .cube-slide-dots {
       bottom: 12px;
@@ -123,12 +135,12 @@ export default {
           .title {
             margin-bottom: 10px;
             color: #fff;
-            line-height:20px;
+            line-height: 20px;
           }
 
           .desc {
             color: hsla(0, 0%, 100%, 0.3);
-            font-size:14px;
+            font-size: 14px;
           }
         }
       }
