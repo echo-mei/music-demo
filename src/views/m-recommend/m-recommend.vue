@@ -12,17 +12,29 @@
     </cube-slide>
     <div class="recommend-list">
       <h1 class="list-title">热门歌单推荐</h1>
+      <ul class="list-cont">
+        <li class="list-item" v-for="item in songList" :key="item.id">
+          <div class="avatar">
+            <img :src="item.imgurl">
+          </div>
+          <div class="cont">
+            <h2 class="title">{{item.creator.name}}</h2>
+            <p class="desc">{{item.dissname}}</p>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import { getSlide,getSongList } from "api/recommend";
+import { getSlide, getSongList } from "api/recommend";
 import { ERR_OK } from "api/config";
 export default {
   data() {
     return {
-      slideData: []
+      slideData: [],
+      songList: []
     };
   },
   created() {
@@ -32,16 +44,17 @@ export default {
   methods: {
     _getSlide() {
       getSlide().then(res => {
-          if (res.code === ERR_OK) {
-            this.slideData = res.data.slider;
-          }
+        if (res.code === ERR_OK) {
+          this.slideData = res.data.slider;
         }
-      );
+      });
     },
     _getSongList() {
       getSongList().then(res => {
-        console.log(res);
-      })
+        if (res.code === ERR_OK) {
+          this.songList = res.data.list;
+        }
+      });
     }
   }
 };
@@ -50,6 +63,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" rel="stylesheet/stylus">
 .m-recommend {
+  height:calc(100% - 88px);
+  overflow:auto;
   color: #fff;
 
   .cube-slide {
@@ -82,6 +97,41 @@ export default {
       text-align: center;
       font-size: 14px;
       color: #ffcd32;
+    }
+
+    .list-cont {
+      .list-item {
+        display: flex;
+        padding: 0 20px 20px 20px;
+        align-items: center;
+        text-align: left;
+
+        .avatar {
+          flex: 0 0 60px;
+          width: 60px;
+          padding-right: 20px;
+
+          img {
+            width: 60px;
+            height: 60px;
+          }
+        }
+
+        .cont {
+          flex: 1;
+
+          .title {
+            margin-bottom: 10px;
+            color: #fff;
+            line-height:20px;
+          }
+
+          .desc {
+            color: hsla(0, 0%, 100%, 0.3);
+            font-size:14px;
+          }
+        }
+      }
     }
   }
 }

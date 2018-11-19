@@ -2,7 +2,9 @@
   <div id="app">
     <m-header></m-header>
     <m-tabs></m-tabs> 
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 <script>
@@ -14,7 +16,7 @@ export default {
     return {
       options: [2013, 2014, 2015, 2016, 2017, 2018],
       value: 2016
-    }
+    };
   },
   components: {
     MHeader,
@@ -23,12 +25,16 @@ export default {
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
+html,body{
+  height:100%;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height:100%;
 }
 
 #nav {

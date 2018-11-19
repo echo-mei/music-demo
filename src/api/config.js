@@ -7,8 +7,8 @@ export const commonParams = {
 };
 
 export const options = {
-  param: "jsonpCallback",
-  name: "callback",
+  param: "callback",
+  name: "jsonpCallback",
   prefix: "jp"
 };
 

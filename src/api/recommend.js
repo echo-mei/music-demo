@@ -11,7 +11,7 @@ export function getSlide() {
     _: 1539738977095
   });
   return axios
-    .get("musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg", {
+    .get("/api/getRecommend", {
       params: data
     })
     .then(res => {
@@ -20,6 +20,27 @@ export function getSlide() {
 }
 
 export function getSongList() {
+  const data = Object.assign({}, commonParams, {
+    g_tk: 1928093487,
+    format: "json",
+    platform: "yqq",
+    hostUin: 0,
+    sin: 0,
+    ein: 29,
+    sortId: 5,
+    needNewCode: 0,
+    categoryId: 10000000,
+    rnd: Math.random()
+  });
+  return axios
+    .get("/api/getDiscList", {
+      params: data
+    })
+    .then(res => {
+      return Promise.resolve(res.data);
+    });
+}
+export function getSongList1() {
   const url = "https://u.y.qq.com/cgi-bin/musicu.fcg";
 
   const data = Object.assign({}, commonParams, {
