@@ -15,7 +15,7 @@
       <ul class="list-cont">
         <li class="list-item" v-for="item in songList" :key="item.id">
           <div class="avatar">
-            <img :src="item.imgurl">
+            <img v-lazy="item.imgurl">
           </div>
           <div class="cont">
             <h2 class="title">{{item.creator.name}}</h2>
@@ -23,6 +23,9 @@
           </div>
         </li>
       </ul>
+      <div class="loading-container"  v-show="!songList.length">
+        <cube-loading></cube-loading>
+      </div>
     </div>
   </div>
 </template>
@@ -103,6 +106,13 @@ export default {
   }
 
   .recommend-list {
+    position:relative;
+    .loading-container{
+      position:absolute;
+      top:90px;
+      left:50%;
+      transform:translateX(-50%);
+    }
     .list-title {
       height: 65px;
       line-height: 65px;

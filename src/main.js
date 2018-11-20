@@ -4,8 +4,12 @@ import router from "./router/router";
 import store from "./store/store";
 import "common/stylus/index.styl";
 import Cube from "cube-ui";
+import VueLazyload from "vue-lazyload";
 
 Vue.use(Cube);
+Vue.use(VueLazyload, {
+  loading: require("common/image/default.png")
+});
 
 Vue.config.productionTip = false;
 
