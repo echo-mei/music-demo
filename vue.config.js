@@ -6,7 +6,7 @@
 // 例如：https://www.foobar.com/my-app/
 // 需要将它改为'/my-app/'
 const path = require("path");
-const axios = require("axios");
+// const axios = require("axios");
 
 function resolve(dir) {
   console.log(__dirname);
@@ -34,53 +34,60 @@ module.exports = {
     port: 9999, // 端口号
     host: "localhost",
     open: true, //配置自动启动浏览器
-    // proxy: "https://c.y.qq.com/" // 配置跨域处理,只有一个代理,
-    // proxy: {
-    //   "/api": {
-    //     target: "<url>",
-    //     changeOrigin: true
-    //   },
-    //   "/foo": {
-    //     target: "<other_url>"
-    //   }
-    // }
-    before: function(app) {
-      app.get("/api/getRecommend", function(req, res) {
-        const url =
-          "https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg";
-        axios
-          .get(url, {
-            headers: {
-              referer: "https://c.y.qq.com/",
-              host: "c.y.qq.com"
-            },
-            params: req.query
-          })
-          .then(response => {
-            res.json(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      });
-      app.get("/api/getDiscList", function(req, res) {
-        const url =
-          "https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg";
-        axios
-          .get(url, {
-            headers: {
-              referer: "https://c.y.qq.com/",
-              host: "c.y.qq.com"
-            },
-            params: req.query
-          })
-          .then(response => {
-            res.json(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      });
+    // proxy: "https://u.y.qq.com/" // 配置跨域处理,只有一个代理,
+    proxy: {
+      "/api": {
+        target: "https://c.y.qq.com", //需要代理的地址
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api": "/" //这里理解成用‘/api’代替target里面的地址，调取接口时直接用/api代替
+        }
+      },
+      "/apipc": {
+        target: "https://u.y.qq.com/", //需要代理的地址
+        changeOrigin: true,
+        pathRewrite: {
+          "^/apipc": ""
+        }
+      }
     }
+    // before: function(app) {
+    //   app.get("/api/getRecommend", function(req, res) {
+    //     const url =
+    //       "https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg";
+    //     axios
+    //       .get(url, {
+    //         headers: {
+    //           referer: "https://c.y.qq.com/",
+    //           host: "c.y.qq.com"
+    //         },
+    //         params: req.query
+    //       })
+    //       .then(response => {
+    //         res.json(response.data);
+    //       })
+    //       .catch(e => {
+    //         console.log(e);
+    //       });
+    //   });
+    //   app.get("/api/getDiscList", function(req, res) {
+    //     const url =
+    //       "https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg";
+    //     axios
+    //       .get(url, {
+    //         headers: {
+    //           referer: "https://c.y.qq.com/",
+    //           host: "c.y.qq.com"
+    //         },
+    //         params: req.query
+    //       })
+    //       .then(response => {
+    //         res.json(response.data);
+    //       })
+    //       .catch(e => {
+    //         console.log(e);
+    //       });
+    //   });
+    // }
   }
 };

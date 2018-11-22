@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { getSlide, getSongList } from "api/recommend";
+import { getSlide, getSongList1 } from "api/recommend";
 import { ERR_OK } from "api/config";
 export default {
   data() {
@@ -53,7 +53,7 @@ export default {
       });
     },
     _getSongList() {
-      getSongList().then(res => {
+      getSongList1().then(res => {
         if (res.code === ERR_OK) {
           this.songList = res.data.list;
         }

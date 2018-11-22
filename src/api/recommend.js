@@ -8,10 +8,10 @@ export function getSlide() {
     format: "json",
     platform: "h5",
     needNewCode: 1,
-    _: 1539738977095
+    _: 1542793042786
   });
   return axios
-    .get("/api/getRecommend", {
+    .get("/api/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg", {
       params: data
     })
     .then(res => {
@@ -41,9 +41,10 @@ export function getSongList() {
     });
 }
 export function getSongList1() {
-  const url = "https://u.y.qq.com/cgi-bin/musicu.fcg";
+  const url = "/apipc/cgi-bin/musicu.fcg";
 
   const data = Object.assign({}, commonParams, {
+    g_tk: 5381,
     loginUin: 0,
     hostUin: 0,
     platform: "yqq",
