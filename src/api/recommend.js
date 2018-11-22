@@ -33,7 +33,7 @@ export function getSongList() {
     rnd: Math.random()
   });
   return axios
-    .get("/api/getDiscList", {
+    .get("/huangyi/music/api/getDiscList", {
       params: data
     })
     .then(res => {
