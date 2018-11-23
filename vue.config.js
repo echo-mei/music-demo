@@ -36,25 +36,25 @@ module.exports = {
     open: true, //配置自动启动浏览器
     // proxy: "https://c.y.qq.com/" // 配置跨域处理,只有一个代理,
     proxy: {
-      "/apipc": {
-        target: "https://u.y.qq.com/", //需要代理的地址
+      "^/api": {
+        target: "https://c.y.qq.com/",
         changeOrigin: true,
         pathRewrite: {
-          "^/apipc": "/"
+          "^/api": ""
         }
       },
-      "/huangyi": {
-        target: "http://ustbhuangyi.com/", //需要代理的地址
+      "^/pc": {
+        target: "https://u.y.qq.com/",
         changeOrigin: true,
         pathRewrite: {
-          "^/huangyi": "/"
+          "^/pc": ""
         }
       },
-      "/api": {
-        target: "https://c.y.qq.com", //需要代理的地址
+      "^/huangyi": {
+        target: "http://ustbhuangyi.com/",
         changeOrigin: true,
         pathRewrite: {
-          "^/api": "/" //这里理解成用‘/api’代替target里面的地址，调取接口时直接用/api代替
+          "^/huangyi": ""
         }
       }
     }
