@@ -1,59 +1,66 @@
 <template>
   <div class="m-singer">
-    <cube-index-list
-  :data="cityData"
-  :title="title"
-  @select="selectItem"
-  @title-click="clickTitle"></cube-index-list>
+
   </div>
 </template>
 
 <script>
-const cityData = [
-  {
-    name: "★Hot City",
-    items: [
-      {
-        name: "BEIJING",
-        value: 1
-      },
-      {
-        name: "SHANGHAI",
-        value: 2
-      }
-    ]
-  },
-  {
-    name: "A",
-    items: [
-      {
-        name: "ANSHAN",
-        value: 3
-      },
-      {
-        name: "ANQING",
-        value: 4
-      }
-    ]
-  }
-];
+import { getSingerList } from "api/singer";
+import { ERR_OK } from "api/config";
 
 export default {
   data() {
     return {
       title: "Current City: BEIJING",
-      cityData: cityData
+      singerList: []
     };
   },
   created() {
-    // console.log(this.title, this.cityData);
+    this._getSingerList();
   },
   methods: {
-    selectItem(item) {
-      console.log(item.name);
-    },
-    clickTitle(title) {
-      console.log(title);
+    _getSingerList() {
+      getSingerList().then(res => {
+        if (res.code === ERR_OK) {
+          let data = res.data.list;
+          this.singerList.push({});
+          this.singerList[0].name = "热门";
+          this.singerList[0].items = new Array();
+          data.slice(0,10).forEach(item=>{
+            this.singerList[0].items.push(item);
+          });
+          data.slice(10, data.length).forEach(item => {
+            let flag = this.singerList.findIndex(jtem => {
+              return item.Findex == jtem.name;
+            });
+            if (flag != -1) {
+              this.singerList[flag].items.push(item);
+            } else {
+              this.singerList.push({});
+              this.singerList[this.singerList.length - 1].name = item.Findex;
+              this.singerList[this.singerList.length - 1].items = new Array();
+              this.singerList[this.singerList.length - 1].items.push(item);
+            }
+          });
+          this.singerList.sort((a, b) => {
+            let nameA = a.name;
+            let nameB = b.name;
+            if(nameA == "热门"){
+              nameA = 1;
+            }else if(nameB == "热门"){
+              nameB = 1;
+            }
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          });
+          console.log(this.singerList)
+        }
+      });
     }
   }
 };

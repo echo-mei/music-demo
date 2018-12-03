@@ -11,7 +11,7 @@ export function getSlide() {
     _: 1542793042786
   });
   return axios
-    .get("/api/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg", {
+    .get("/wx/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg", {
       params: data
     })
     .then(res => {

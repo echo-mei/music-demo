@@ -1,37 +1,44 @@
 <template>
   <div class="m-recommend">
-    <cube-slide ref="slide" :data="slideData">
-      <cube-slide-item v-for="(item, index) in slideData" :key="index">
-        <a :href="item.linkUrl">
-          <img :src="item.picUrl">
-        </a>
-      </cube-slide-item>
-      <template slot="dots" slot-scope="props">
-        <span class="dot" :class="{active: props.current === index}" v-for="(item, index) in props.dots" :key="index">{{index + 1}}</span>
-      </template>
-    </cube-slide>
-    <div class="recommend-list">
-      <h1 class="list-title">热门歌单推荐</h1>
-      <ul class="list-cont">
-        <li class="list-item" v-for="item in songList" :key="item.id">
-          <div class="avatar">
-            <img v-lazy="item.imgurl">
-          </div>
-          <div class="cont">
-            <h2 class="title">{{item.creator.name}}</h2>
-            <p class="desc">{{item.dissname}}</p>
-          </div>
-        </li>
-      </ul>
-      <div class="loading-container"  v-show="!songList.length">
-        <cube-loading></cube-loading>
+    <cube-scroll>
+      <cube-slide ref="slide" :data="slideData">
+        <cube-slide-item v-for="(item, index) in slideData" :key="index">
+          <a :href="item.linkUrl">
+            <img :src="item.picUrl">
+          </a>
+        </cube-slide-item>
+        <template slot="dots" slot-scope="props">
+          <span
+            class="dot"
+            :class="{active: props.current === index}"
+            v-for="(item, index) in props.dots"
+            :key="index"
+          >{{index + 1}}</span>
+        </template>
+      </cube-slide>
+      <div class="recommend-list">
+        <h1 class="list-title">热门歌单推荐</h1>
+        <ul class="list-cont">
+          <li class="list-item" v-for="item in songList" :key="item.id">
+            <div class="avatar">
+              <img v-lazy="item.imgurl">
+            </div>
+            <div class="cont">
+              <h2 class="title">{{item.creator.name}}</h2>
+              <p class="desc">{{item.dissname}}</p>
+            </div>
+          </li>
+        </ul>
+        <div class="loading-container" v-show="!songList.length">
+          <cube-loading></cube-loading>
+        </div>
       </div>
-    </div>
+    </cube-scroll>
   </div>
 </template>
 
 <script>
-import { getSlide, getSongList} from "api/recommend";
+import { getSlide, getSongList } from "api/recommend";
 import { ERR_OK } from "api/config";
 export default {
   data() {
@@ -53,7 +60,7 @@ export default {
       });
     },
     _getSongList() {
-       getSongList().then(res => {
+      getSongList().then(res => {
         if (res.code === ERR_OK) {
           this.songList = res.data.list;
         }
@@ -76,11 +83,11 @@ export default {
     .cube-slide-item {
       &>a {
         width: 100%;
-        height:auto;
+        height: auto;
 
         &>img {
           width: 100%;
-          height:auto;
+          height: auto;
         }
       }
     }
@@ -106,13 +113,15 @@ export default {
   }
 
   .recommend-list {
-    position:relative;
-    .loading-container{
-      position:absolute;
-      top:90px;
-      left:50%;
-      transform:translateX(-50%);
+    position: relative;
+
+    .loading-container {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
     }
+
     .list-title {
       height: 65px;
       line-height: 65px;

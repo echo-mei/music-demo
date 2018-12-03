@@ -36,11 +36,11 @@ module.exports = {
     open: true, //配置自动启动浏览器
     // proxy: "https://c.y.qq.com/" // 配置跨域处理,只有一个代理,
     proxy: {
-      "^/api": {
+      "^/wx": {
         target: "https://c.y.qq.com/",
         changeOrigin: true,
         pathRewrite: {
-          "^/api": ""
+          "^/wx": ""
         }
       },
       "^/pc": {
@@ -58,43 +58,5 @@ module.exports = {
         }
       }
     }
-    // before: function(app) {
-    //   app.get("/api/getRecommend", function(req, res) {
-    //     const url =
-    //       "https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg";
-    //     axios
-    //       .get(url, {
-    //         headers: {
-    //           referer: "https://c.y.qq.com/",
-    //           host: "c.y.qq.com"
-    //         },
-    //         params: req.query
-    //       })
-    //       .then(response => {
-    //         res.json(response.data);
-    //       })
-    //       .catch(e => {
-    //         console.log(e);
-    //       });
-    //   });
-    //   app.get("/api/getDiscList", function(req, res) {
-    //     const url =
-    //       "https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg";
-    //     axios
-    //       .get(url, {
-    //         headers: {
-    //           referer: "https://c.y.qq.com/",
-    //           host: "c.y.qq.com"
-    //         },
-    //         params: req.query
-    //       })
-    //       .then(response => {
-    //         res.json(response.data);
-    //       })
-    //       .catch(e => {
-    //         console.log(e);
-    //       });
-    //   });
-    // }
   }
 };
