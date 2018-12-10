@@ -18,6 +18,7 @@ export function getSlide() {
       return Promise.resolve(res.data);
     });
 }
+
 export function getSongList() {
   const data = Object.assign({}, commonParams, {
     g_tk: 1928093487,
@@ -39,6 +40,7 @@ export function getSongList() {
       return Promise.resolve(res.data);
     });
 }
+
 export function getSongList1() {
   const data = Object.assign({}, commonParams, {
     g_tk: 5381,
